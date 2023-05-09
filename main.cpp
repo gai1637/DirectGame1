@@ -259,6 +259,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	HANDLE fenceEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
 	assert(fenceEvent != nullptr);
 
+
 	MSG msg{};
 	//ウインドウんxボタンが押されるまでループ
 	while (msg.message != WM_QUIT) {
