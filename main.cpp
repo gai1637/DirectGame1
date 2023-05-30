@@ -428,11 +428,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	graphicsPipelineStateDesc.pRootSignature = rootSignature;//RootSignature
 	graphicsPipelineStateDesc.InputLayout = inputLayoutDesc;//InputLayout
 	graphicsPipelineStateDesc.VS = { vertexShaderBlob->GetBufferPointer(),
-	vertexShaderBlob->GetBufferSize()
-	};//VertexShader
+	vertexShaderBlob->GetBufferSize()};//VertexShader
 	graphicsPipelineStateDesc.PS = { pixelShaderBlob->GetBufferPointer(),
-	pixelShaderBlob->GetBufferSize()
-	};//PixelShader
+	pixelShaderBlob->GetBufferSize()};//PixelShader
 	graphicsPipelineStateDesc.BlendState = blendDesc;//BlendState
 	graphicsPipelineStateDesc.RasterizerState = rasterizerDesc;//RasterizerState
 	//書き込むRTVの情報
@@ -452,6 +450,31 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	
 	//実際に頂点リソースを作る
 	ID3D12Resource* vertexResource = CreateBufferResource(device,sizeof(Vector4)*3);
+	////頂点リソース用のヒープの設定
+	//D3D12_HEAP_PROPERTIES uploadHeapProerties{};
+	//uploadHeapProerties.Type = D3D12_HEAP_TYPE_UPLOAD;//UploadHeapを使う
+	////頂点リソースの設定
+	//D3D12_RESOURCE_DESC vertexResouceDesc{};
+	////バッファリソース。テクスチャの場合はまた別の設定
+	//vertexResouceDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
+	//vertexResouceDesc.Width = sizeof(Vector4) * 3;//リソースのサイズ。今回はVector4を3頂点分
+	////バッファの場合はこれらは1にする決まり
+	//vertexResouceDesc.Height = 1;
+	//vertexResouceDesc.DepthOrArraySize = 1;
+	//vertexResouceDesc.MipLevels = 1;
+	//vertexResouceDesc.SampleDesc.Count = 1;
+	////バッファの場合はこれにする決まり
+	//vertexResouceDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
+
+	////実際に頂点リソースを作る
+	//ID3D12Resource* vertexResource = nullptr;
+	//
+	//hr = device->CreateCommittedResource(&uploadHeapProerties, D3D12_HEAP_FLAG_NONE,
+	//	&vertexResouceDesc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr,
+	//	IID_PPV_ARGS(&vertexResource));
+	//assert(SUCCEEDED(hr));
+
+	
 	
 	//頂点バッファビューを作成する
 	D3D12_VERTEX_BUFFER_VIEW vertexBufferView{};
