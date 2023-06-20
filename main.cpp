@@ -292,9 +292,13 @@ ID3D12DescriptorHeap* CreateDescriptorHeap(
 	assert(SUCCEEDED(hr));
 	return descriptorHeap;
 }
-
+DirectX::ScratchImage LoadTexture(const std::string& filepath) {
+	//テクスチャファイルを読んでプログラムで扱えるようにする
+	
+}
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
+	CoInitializeEx(0, COINIT_MULTITHREADED);
 	WNDCLASS wc{};
 	//ウインドウプロシージャ
 	wc.lpfnWndProc = WindowProc;
@@ -815,7 +819,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	materialResource->Release();
 	transformationMatrixResource->Release();
 	srvDescriptorHeap->Release();
-	
+	CoUninitialize();
 #ifdef _DEBUG
 	debugController->Release();
 #endif // _DEBUG
