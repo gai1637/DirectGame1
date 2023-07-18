@@ -285,11 +285,11 @@ Matrix4x4 MakePerspectiveFovMatrix(float fovY, float aspectRatio, float nearClip
 			matrix.m[a][b] = 0;
 		}
 	}
-	matrix.m[0][0] = 1 / aspectRatio * 1 / tan(fovY / 2);
+	matrix.m[0][0] = 1 / aspectRatio * (1 / tan(fovY / 2));
 	matrix.m[1][1] = 1 / tan(fovY / 2);
-	matrix.m[2][2] = farClip / farClip - nearClip;
-	matrix.m[2][3] = -nearClip * farClip / (farClip - nearClip);
-	matrix.m[3][2] = 1;
+	matrix.m[2][2] = farClip / (farClip - nearClip);
+	matrix.m[3][2] = -(nearClip * farClip) / (farClip - nearClip);
+	matrix.m[2][3] = 1;
 	return matrix;
 }
 ID3D12DescriptorHeap* CreateDescriptorHeap(
